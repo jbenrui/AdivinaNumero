@@ -1,20 +1,42 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+  <ion-header>
+    <ion-toolbar appHighlight>
+      <ion-title appHighlight>
+        Adivina un Numero - Jose Antonio Benitez Ruiz
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content>
+  <div id="cardTry">
+    <ion-card>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label position="floating" style="color: #535a2d ;">Introduce el numero:</ion-label>
+          <ion-input style="color: #535a2d;" [(ngModel)]="num"></ion-input>
+        </ion-item>
+        <div style="text-align:center"> <!--Centro el botón-->
+          <ion-button (click)="tryIt(num)">Try</ion-button>
+        </div>
+        
+      </ion-card-content>
+    </ion-card>
   </div>
+
+
+  <ion-card>  
+    <ion-card-content *ngIf="estado_!=2">
+      <ion-text id="showMeNum">{{randomNumber}}</ion-text>
+      <div>
+        <ion-text style="color: #535a2d;" *ngIf="estado_==1">El numero a adivinar es mayor</ion-text>
+        <ion-text style="color: #535a2d;" *ngIf="estado_==-1">El numero a adivinar es menor</ion-text>
+        <div *ngIf="estado_==0">
+          <ion-text style="color: #535a2d;">Has acertado!</ion-text>
+          <div style="text-align:center"> <!--Centro el botón-->
+            <ion-button (click)="restartIt()">Restart</ion-button>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
