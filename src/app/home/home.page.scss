@@ -1,14 +1,20 @@
-#cardTry{
-  width: 50%;
-  margin: auto;
-  
-}
 
 ion-item{
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 2em;
+  border-radius: 20px;
 }
 
 ion-label{
   color: black;
+}
+
+ion-img{
+  width: auto;
+  margin: auto;
+}
+
+ion-accordion-group{
+  width: 50%;
+  margin: auto;
 }

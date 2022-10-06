@@ -1,42 +1,67 @@
 
-  <ion-header>
-    <ion-toolbar appHighlight>
-      <ion-title appHighlight>
-        Adivina un Numero - Jose Antonio Benitez Ruiz
-      </ion-title>
+  <ion-header appHighlight>
+    <div appHighlight>
+    <ion-toolbar>
+        <ion-title>
+          Adivina un Numero - Jose Antonio Benitez Ruiz
+        </ion-title>
     </ion-toolbar>
+    </div>
   </ion-header>
 
 <ion-content>
-  <div id="cardTry">
-    <ion-card>
-      <ion-card-content>
-        <ion-item lines="none">
-          <ion-label position="floating" style="color: #535a2d ;">Introduce el numero:</ion-label>
-          <ion-input style="color: #535a2d;" [(ngModel)]="num"></ion-input>
-        </ion-item>
-        <div style="text-align:center"> <!--Centro el botón-->
-          <ion-button (click)="tryIt(num)">Try</ion-button>
-        </div>
-        
-      </ion-card-content>
-    </ion-card>
-  </div>
-
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col size-xl="4" size-lg="6" size-md="12" class="ion-align-self-center" >
+        <ion-card>
+          <ion-card-content>
+            <ion-img src="../../assets/adivinaNumero.jpg"></ion-img><br>
+            <ion-item lines="none" >
+              <ion-label position="floating" [ngStyle]="{'color':'#Ffffff'}" >Introduce el numero:</ion-label>
+              <ion-input [(ngModel)]="num"></ion-input>
+            </ion-item>
+            <div style="text-align:center"> <!--Centro el botón-->
+              <ion-button (click)="tryIt(num)" (click)="history(num)">Try</ion-button>
+            </div>
+            
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <ion-card>  
-    <ion-card-content *ngIf="estado_!=2">
-      <ion-text id="showMeNum">{{randomNumber}}</ion-text>
-      <div>
-        <ion-text style="color: #535a2d;" *ngIf="estado_==1">El numero a adivinar es mayor</ion-text>
-        <ion-text style="color: #535a2d;" *ngIf="estado_==-1">El numero a adivinar es menor</ion-text>
-        <div *ngIf="estado_==0">
-          <ion-text style="color: #535a2d;">Has acertado!</ion-text>
-          <div style="text-align:center"> <!--Centro el botón-->
-            <ion-button (click)="restartIt()">Restart</ion-button>
+    <!--NgClass preguntar como usar con variables-->
+    <!--Recordatorio quitar el randomNumber del ion-text-->
+    <ion-card-content  *ngIf="estado_!=2">
+        <ion-text   id="showMeNum">{{randomNumber}}</ion-text>
+        <ion-text  ng-class="estado_ ? '1' : 'color':'warning'" *ngIf="estado_==1">El numero a adivinar es mayor</ion-text>
+        <ion-text ng-class="estado_? '-1' : 'color':'red'" *ngIf="estado_==-1">El numero a adivinar es menor</ion-text>
+        <div ng-class="estado_ ? '0' : 'color':'success'" *ngIf="estado_== 0">
+          <ion-text>Has acertado!</ion-text>
+          <div [ngStyle]="{'text-align':'center'}"> <!--Centro el botón-->
+            <ion-button (click)="generateIt()">Generate</ion-button>
           </div>
         </div>
-      </div>
     </ion-card-content>
   </ion-card>
+  <!--Accordion group-->
+
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light" >
+        <ion-label>Lista de Intentos</ion-label>
+      </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-grid>
+            <!--Hacer un componente para el historial-->
+            <ion-row [ngStyle]="{'background-color':'#2196f3', 'text-align':'center','border-radius':'20px'}" class="ion-align-items-center ion-justify-content-center">
+              <ion-col class="ion-align-self-center" size="9" size-sm="3" *ngFor="let num of numbers">
+                {{num}}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-accordion>
+  </ion-accordion-group>
 </ion-content>

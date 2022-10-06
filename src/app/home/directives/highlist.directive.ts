@@ -10,7 +10,7 @@ export class HighlightDirective {
 
   @HostListener('mouseenter') onMouseEnter() {
     this.highlight.nativeElement.style.transition = "all 2s";
-    this.highlight.nativeElement.style.background = "#0066cc"  
+    this.highlight.nativeElement.style.background = "#0066cc";
   }
 
   @HostListener('mouseleave') onMouseLeave() {
@@ -18,7 +18,9 @@ export class HighlightDirective {
     this.highlight.nativeElement.style.background = "#7dbeff"  
   }
 
-  constructor(private highlight : ElementRef){} ////Inyecta el elemento nativo con angular en la variable privada highlight.
+  constructor(private highlight : ElementRef){
+
+  } ////Inyecta el elemento nativo con angular en la variable privada highlight.
 
 
   @Input() appHighlight = '';
